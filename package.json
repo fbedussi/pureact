@@ -1,0 +1,19 @@
+{
+  "name": "wc-utils",
+  "version": "1.0.0",
+  "description": "A collection of helpers for web components",
+  "main": "wc-utils.js",
+  "scripts": {
+    "test": "jest",
+    "testWatch": "jest --watch"
+  },
+  "author": "Francesco Bedussi",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0"
+  }
+}
