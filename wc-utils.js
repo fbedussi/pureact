@@ -86,7 +86,7 @@ export function extendComponent(clazz, attributes = []) {
     }
 
     clazz.prototype.getHandlerRef = function(handlerName) {
-        return `document.componentRegistry[${this._id}]['${handlerName.name}']()`;
+        return `(function(event) {document.componentRegistry[${this._id}]['${handlerName.name}'](event, ${params})})(event)`;
     }   
 
     return clazz;
