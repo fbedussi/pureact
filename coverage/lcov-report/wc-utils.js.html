@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for wc-utils.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="index.html">All files</a> wc-utils.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">60.66% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>37/61</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.38% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>12/29</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">52.94% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>9/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">60% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>36/60</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var parser = new DOMParser();
+&nbsp;
+function convertFromString(attribute) {
+    if (attribute === 'true') {
+        return true;
+    }
+&nbsp;
+    if (attribute === 'false') {
+        return false;
+    }
+&nbsp;
+    const num = Number(attribute); 
+&nbsp;
+    if (!isNaN(num)) {
+        return num;
+    }
+&nbsp;
+    try {
+        const obj = JSON.parse(attribute);
+        return obj;
+    } catch(e) {
+        return attribute;
+    }
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >convertToString(</span>attribute) {
+<span class="cstat-no" title="statement not covered" >    if (attribute === true) {</span>
+<span class="cstat-no" title="statement not covered" >        return 'true';</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (attribute === false) {</span>
+<span class="cstat-no" title="statement not covered" >        return 'false';</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!isNaN(attribute)) {</span>
+<span class="cstat-no" title="statement not covered" >        return attribute.toString();</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        const obj = <span class="cstat-no" title="statement not covered" >JSON.stringify(attribute);</span>
+<span class="cstat-no" title="statement not covered" >        return obj;</span>
+    } catch(e) {
+<span class="cstat-no" title="statement not covered" >        return attribute;</span>
+    }
+}
+&nbsp;
+var nextId = 0;
+&nbsp;
+export function extendComponent(clazz, attributes = []) {
+    if (!document.componentRegistry) {
+        document.componentRegistry = { };
+    }
+    
+    Object.defineProperty(clazz, 'observedAttributes', { get: function() { return attributes; } });
+    attributes.forEach((attribute) =&gt; {
+        Object.defineProperty(
+            clazz.prototype, 
+            attribute, 
+            { 
+                get: <span class="fstat-no" title="function not covered" >fu</span>nction() { 
+                    const attr = <span class="cstat-no" title="statement not covered" >this.getAttribute(attribute);</span>
+<span class="cstat-no" title="statement not covered" >                    return convertFromString(attr);</span>
+                }, 
+                set: <span class="fstat-no" title="function not covered" >fu</span>nction(newValue) { 
+                    const convertedAttribute = <span class="cstat-no" title="statement not covered" >convertToString(newValue);</span>
+<span class="cstat-no" title="statement not covered" >                    return this.setAttribute(attribute, convertedAttribute); </span>
+                } 
+            });
+    });
+&nbsp;
+    clazz.prototype.attributeChangedCallback = function(name, oldValue, newValue) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof clazz.prototype.propertyChangedCallback === 'function') {
+            clazz.prototype.propertyChangedCallback.call(this, name, convertFromString(oldValue), convertFromString(newValue));
+        }
+    }
+&nbsp;
+    clazz.prototype.setState = function(stateUpdate) {
+        this.state = this.state ? <span class="branch-0 cbranch-no" title="branch not covered" >{...this.state, stateUpdate} </span>: {...stateUpdate};
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof this.render === 'function') {
+            this.render();
+        }
+    }
+&nbsp;
+    clazz.prototype.registerComponent = function() {
+        this._id = ++nextId;
+        document.componentRegistry[this._id] = this;
+&nbsp;
+        this.disconnectedCallback = function() {
+            this.unregisterComponent();
+        }
+    }
+&nbsp;
+    clazz.prototype.unregisterComponent = function() {
+        delete document.componentRegistry[this._id];
+    }
+&nbsp;
+    let paramId = 0;
+    function <span class="fstat-no" title="function not covered" >registerParameter(</span>componentId, handlerName) {
+<span class="cstat-no" title="statement not covered" >        return function <span class="fstat-no" title="function not covered" >returnPramater(</span>param) {</span>
+<span class="cstat-no" title="statement not covered" >            paramId += 1;</span>
+<span class="cstat-no" title="statement not covered" >            document.componentRegistry[componentId][handlerName][`_param_${paramId}`] = param;</span>
+<span class="cstat-no" title="statement not covered" >            return `document.componentRegistry[${componentId}]['${handlerName}']['${`_param_${paramId}`}']`;</span>
+        }
+    }
+    
+    clazz.prototype.getHandlerRef = <span class="fstat-no" title="function not covered" >fu</span>nction(handler, ...params) {
+<span class="cstat-no" title="statement not covered" >        return `return document.componentRegistry[${this._id}]['${handler.name}'](event${params.length ? ', ' + params.map(registerParameter(this._id, handler.name)).join(',') : ''})`;</span>
+    }   
+&nbsp;
+    clazz.prototype.html = <span class="fstat-no" title="function not covered" >fu</span>nction(newDomStr) {
+        const newDom = <span class="cstat-no" title="statement not covered" >parser.parseFromString(newDomStr, 'text/html');</span>
+<span class="cstat-no" title="statement not covered" >        morphdom(this, newDom.body, {childrenOnly: true});</span>
+    }
+&nbsp;
+    return clazz;
+}
+&nbsp;
+//classList is an array with 4 values in this order:
+//0 - base state
+//1 - progress animation
+//2 - animation ended state
+//3 - reverse animation
+export function <span class="fstat-no" title="function not covered" >getAnimationClass(</span>currentState, prevState, classList) {
+<span class="cstat-no" title="statement not covered" >    if (currentState) {</span>
+<span class="cstat-no" title="statement not covered" >        return prevState ? classList[2] : classList[2] + ' ' + classList[1];</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        return prevState ? classList[2] + ' ' + classList[3] : classList[0];</span>
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 25 2018 23:22:07 GMT+0100 (ora solare Europa occidentale)
+</div>
+</div>
+<script src="prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="sorter.js"></script>
+</body>
+</html>

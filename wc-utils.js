@@ -44,14 +44,13 @@ function convertToString(attribute) {
     }
 }
 
+var nextId = 0;
+
 export function extendComponent(clazz, attributes = []) {
     if (!document.componentRegistry) {
         document.componentRegistry = { };
     }
-    if (!document.nextId) {
-        document.nextId = 0;
-    }
-
+    
     Object.defineProperty(clazz, 'observedAttributes', { get: function() { return attributes; } });
     attributes.forEach((attribute) => {
         Object.defineProperty(
@@ -83,7 +82,7 @@ export function extendComponent(clazz, attributes = []) {
     }
 
     clazz.prototype.registerComponent = function() {
-        this._id = ++document.nextId;
+        this._id = ++nextId;
         document.componentRegistry[this._id] = this;
 
         this.disconnectedCallback = function() {
@@ -99,13 +98,13 @@ export function extendComponent(clazz, attributes = []) {
     function registerParameter(componentId, handlerName) {
         return function returnPramater(param) {
             paramId += 1;
-            document.componentRegistry[componentId][handlerName][`param_${paramId}`] = param;
-            return `document.componentRegistry[${componentId}]['${handlerName}']['${`param_${paramId}`}']`;
+            document.componentRegistry[componentId][handlerName][`_param_${paramId}`] = param;
+            return `document.componentRegistry[${componentId}]['${handlerName}']['${`_param_${paramId}`}']`;
         }
     }
-
+    
     clazz.prototype.getHandlerRef = function(handler, ...params) {
-        return `return document.componentRegistry[${this._id}]['${handler.name}'](event, ${params.map(registerParameter(this._id, handler.name)).join(',')})`;
+        return `return document.componentRegistry[${this._id}]['${handler.name}'](event${params.length ? ', ' + params.map(registerParameter(this._id, handler.name)).join(',') : ''})`;
     }   
 
     clazz.prototype.html = function(newDomStr) {
