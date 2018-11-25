@@ -20,6 +20,7 @@ window.customElements.define('my-custom-button', extendComponent(MyCustomButton,
 `extendComponent` takes care of some boilerplate code to watch for attributes change and to reflect attributes to properties:
 - sets the `observedAttributes` method to return the `propsArray`.
 - sets the getter and setters for every attribute in the `propsArray` in order to reflect attributes to properties and vice versa. It converts boolean, numbers and plain objects to and from string in the process.
+- provides the `propertyChangedCallback()` with the same signature of the regular `attributeChangedCallback()`, that is called every time the observed attributes change. The difference from the `attributeChangedCallback()` is that the property values passed to the callback are converted from strings to boolean, number, string or objects.
 
 ### setState
 `extendComponent` adds a `setState` method that updates the `state` property and calls the `render` methods (if there is one).
@@ -46,45 +47,30 @@ First register the component
 ```
 then define an event handler as a component's method
 ```javascript
-    handleToggleSearch() {
-        //Handle toggle search
+    handleClick() {
+        //Handle click
     }
 ```
 finnally use `this.getHandlerRef` to get a reference to the method to pass as an inline event handler 
 ```javascript
-    render(warrantyTypes) {
-        this.innerHTML = /*html*/`<form class="searchWrapper">
-            ${ToggleSearch(this.getHandlerRef(this.handleToggleSearch))}
-        `;
+    render() {
+        this.innerHTML = /*html*/`<input type="checkbox" onclick="${this.getHandlerRef(this.handleClick)}">`;
     }
-```
-`ToggleSearch` being a functional component like this:
-```javascript
-export default (handleClick) => /*html*/`
-    <label class="d-flex align-items-center mt-3">
-        <span class="switch switch-3d switch-secondary mr-2">
-            <input id="toggleAdvancedSearch" type="checkbox" class="switch-input" onclick="${handleClick}">
-            <span class="switch-label"></span>
-            <span class="switch-handle"></span>
-        </span>
-        <span>Ricerca avanzata</span>
-    </label>`;
 ```
 you can pass any number of arguments to events handler:
 ```javascript
-<ul>
+this.innerHTML = /*html*/`<ul>
     ${storeTypes.map((storeType) => {
         return /*html*/`
             <li>
-                <button class="storeTypeBtn" 
-                    onclick="${this.getHandlerRef(this.handleFilterClick, storeType)}">
-                    <span class="icon">x</span>    
-                    <span class="text">${storeType.name}</span>
+                <button 
+                    onclick="${this.getHandlerRef(this.handleFilterClick, storeType)}"> 
+                    ${storeType.name}
                 </button>
             </li>
         `
     }).join('')}
-</ul>
+</ul>`;
 ```
 the handler will receive those arguments, plus the `event` object as first parameter: 
 ```javascript
@@ -99,6 +85,7 @@ handleFilterClick(event, storeType) {
 N.B. morphdom must be included separately as a global function, e.g.:
 ```html
 <script src="https://cdn.jsdelivr.net/npm/morphdom@2.3.3/dist/morphdom.min.js"></script>
+This is to give you the freedom to choose the version of morphdom you prefer (regular, minified, customised, whatever).
 ```
 
 #### Usage
@@ -108,10 +95,10 @@ this.html(/*html*/`<collapsable-tab open=${filterPanelOpen}>
                 ${this.renderTabContent(storeTypes, selectedStoreTypesId, oldState)}
             </collapsable-tab>`);
 ```
-N.B. Pay attention not to leave any spaces at the beginning of the string. 
+N.B. Pay attention not to leave any spaces at the beginning or at the end of the string, morphdom will interpret them as text node with a CR char in it. 
 
 # getAnimationClass
-Choose the class to apply the right CSS animation, based on current and previous state
+An helper that picks up the class to apply the right CSS animation, based on current and previous state.
 
 ## How to use it
 Signature:
