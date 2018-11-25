@@ -70,3 +70,69 @@ export default (handleClick) => /*html*/`
         <span>Ricerca avanzata</span>
     </label>`;
 ```
+you can pass any number of arguments to events handler:
+```javascript
+<ul>
+    ${storeTypes.map((storeType) => {
+        return /*html*/`
+            <li>
+                <button class="storeTypeBtn" 
+                    onclick="${this.getHandlerRef(this.handleFilterClick, storeType)}">
+                    <span class="icon">x</span>    
+                    <span class="text">${storeType.name}</span>
+                </button>
+            </li>
+        `
+    }).join('')}
+</ul>
+```
+the handler will receive those arguments, plus the `event` object as first parameter: 
+```javascript
+handleFilterClick(event, storeType) {
+    dispatch(toggleStoreTypeAction(storeType.id));
+}
+``` 
+
+### Update DOM
+`extendComponent` provides the `html` function that uses [morphdom](https://github.com/patrick-steele-idem/morphdom) to update the DOM in a non destructive and very efficient way. 
+
+N.B. morphdom must be included separately as a global function, e.g.:
+```html
+<script src="https://cdn.jsdelivr.net/npm/morphdom@2.3.3/dist/morphdom.min.js"></script>
+```
+
+#### Usage
+Just call `this.html(newDom: string)`:
+```javascript
+this.html(/*html*/`<collapsable-tab open=${filterPanelOpen}>
+                ${this.renderTabContent(storeTypes, selectedStoreTypesId, oldState)}
+            </collapsable-tab>`);
+```
+N.B. Pay attention not to leave any spaces at the beginning of the string. 
+
+# getAnimationClass
+Choose the class to apply the right CSS animation, based on current and previous state
+
+## How to use it
+Signature:
+`getAnimationClass(currentState: boolean, prevState: boolean, classList: string[]): string`
+
+classList is an array with 4 values in this order:
+
+0. base state
+1. progress animation
+2. animation ended state
+3. reverse animation
+
+Example:
+```javascript
+const animationClass = getAnimationClass(isActive, wasActive, ['invisible', 'fade-in', 'visible', 'fade-out']);
+return /*html*/`
+    <li>
+        <button class="storeTypeBtn" 
+            <span class="icon ${animationClass}">x</span>    
+            <span class="text">${storeType.name}</span>
+        </button>
+    </li>
+`
+```
