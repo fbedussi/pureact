@@ -47,8 +47,8 @@ function convertToString(attribute) {
 var nextId = 0;
 
 export function extendComponent(clazz, attributes = []) {
-    if (!document.componentRegistry) {
-        document.componentRegistry = { };
+    if (!document._componentRegistry) {
+        document._componentRegistry = {};
     }
     
     Object.defineProperty(clazz, 'observedAttributes', { get: function() { return attributes; } });
@@ -76,14 +76,12 @@ export function extendComponent(clazz, attributes = []) {
 
     clazz.prototype.setState = function(stateUpdate) {
         this.state = this.state ? {...this.state, stateUpdate} : {...stateUpdate};
-        if (typeof this.render === 'function') {
-            this.render();
-        }
+        this.render(this.state);
     }
 
     clazz.prototype.registerComponent = function() {
         this._id = ++nextId;
-        document.componentRegistry[this._id] = this;
+        document._componentRegistry[this._id] = this;
 
         this.disconnectedCallback = function() {
             this.unregisterComponent();
@@ -91,21 +89,36 @@ export function extendComponent(clazz, attributes = []) {
     }
 
     clazz.prototype.unregisterComponent = function() {
-        delete document.componentRegistry[this._id];
+        delete document._componentRegistry[this._id];
     }
 
-    let paramId = 0;
-    function registerParameter(componentId, handlerName) {
+    function registerParameter(componentId) {
         return function returnPramater(param) {
-            paramId += 1;
-            document.componentRegistry[componentId][handlerName][`_param_${paramId}`] = param;
-            return `document.componentRegistry[${componentId}]['${handlerName}']['${`_param_${paramId}`}']`;
+            document._componentRegistry[componentId]._parameterRegistry.push(param);
+            const paramIndex = document._componentRegistry[componentId]._parameterRegistry.length - 1;
+            return `document._componentRegistry[${componentId}]._parameterRegistry[${paramIndex}]`;
         }
     }
     
     clazz.prototype.getHandlerRef = function(handler, ...params) {
-        return `return document.componentRegistry[${this._id}]['${handler.name}'](event${params.length ? ', ' + params.map(registerParameter(this._id, handler.name)).join(',') : ''})`;
+        return `return document._componentRegistry[${this._id}]['${handler.name}'](event${params.length ? ', ' + params.map(registerParameter(this._id)).join(',') : ''})`;
     }   
+
+    clazz.prototype.resetParameterRegistry = function() {
+        if (!this._id || !document._componentRegistry) {
+            return;
+        }
+        document._componentRegistry[this._id]._parameterRegistry = [];
+    }
+
+    clazz.prototype._render = clazz.prototype.render;
+
+    clazz.prototype.render = function(...args) {
+        this.resetParameterRegistry();
+        if (typeof this._render === 'function') {
+            this._render(...args);
+        }
+    }
 
     clazz.prototype.html = function(newDomStr) {
         const newDom = parser.parseFromString(newDomStr, 'text/html');
