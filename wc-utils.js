@@ -45,10 +45,9 @@ function convertToString(attribute) {
 }
 
 var nextId = 0;
-
 export function extendComponent(clazz, attributes = []) {
     if (!document._componentRegistry) {
-        document._componentRegistry = {};
+        document._componentRegistry = { };
     }
     
     Object.defineProperty(clazz, 'observedAttributes', { get: function() { return attributes; } });
@@ -123,6 +122,12 @@ export function extendComponent(clazz, attributes = []) {
     clazz.prototype.html = function(newDomStr) {
         const newDom = parser.parseFromString(newDomStr, 'text/html');
         morphdom(this, newDom.body, {childrenOnly: true});
+    }
+
+    clazz.prototype.renderChildComponent = function(componentTag) {
+        const component = new (window.customElements.get(componentTag))();
+        component.render()
+        return component.outerHTML;
     }
 
     return clazz;
