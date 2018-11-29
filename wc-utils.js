@@ -74,7 +74,7 @@ export function extendComponent(clazz, attributes = []) {
     }
 
     clazz.prototype.setState = function(stateUpdate) {
-        this.state = this.state ? {...this.state, stateUpdate} : {...stateUpdate};
+        this.state = this.state ? {...this.state, ...stateUpdate} : {...stateUpdate};
         this.render(this.state);
     }
 
@@ -121,7 +121,7 @@ export function extendComponent(clazz, attributes = []) {
 
     clazz.prototype.html = function(newDomStr) {
         const newDom = parser.parseFromString(newDomStr, 'text/html');
-        morphdom(this, newDom.body, {childrenOnly: true});
+        morphdom(this, newDom, {childrenOnly: true});
     }
 
     clazz.prototype.renderChildComponent = function(componentTag) {
