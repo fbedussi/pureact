@@ -2,7 +2,7 @@
   "name": "pureact",
   "version": "1.0.0",
   "description": "A thiny library to use the reactive programming paradigm with web components",
-  "keywords": ["reactive", "web components", "declarative", "morphdom"],
+  "keywords": ["reactive", "web components", "declarative", "morphdom", "vanilla js", "react"],
   "main": "pureact.js",
   "scripts": {
     "test": "jest",

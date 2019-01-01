@@ -1,6 +1,7 @@
 # Pureact
 
-Pureact is a thiny library (less than 200 lines of code, 1.4kb minified and zipped) to use the [reactive programming paradigm](https://en.wikipedia.org/wiki/Reactive_programming) with web components. Like react but with pure vanilla JavaScript. 
+Pureact is a thiny library (less than 200 lines of code, 1.4kb minified and zipped) to use the [reactive programming paradigm](https://en.wikipedia.org/wiki/Reactive_programming) with web components. Like react, but with pure vanilla JavaScript. 
+
 The actual DOM manipulation is handled by [morphdom](https://github.com/patrick-steele-idem/morphdom) a lightweight and super fast DOM diffing/patching library that works with actual DOM, no virtual DOM involved. Morphdom is at the core of [marko.js](https://markojs.com/) the library used by Ebay. 
 
 Pureact has performance similar to React (same fps, slightly more memory usage), but offers several advantages over a virtual DOM library like React:
