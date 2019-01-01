@@ -1,4 +1,6 @@
-var parser = new DOMParser();
+function parseDomString(domStr) {
+    return document.createRange().createContextualFragment(domStr);
+}
 
 function convertFromString(attribute) {
     if (attribute === 'true') {
@@ -45,6 +47,7 @@ function convertToString(attribute) {
 }
 
 var nextId = 0;
+
 export function extendComponent(clazz, attributes = []) {
     if (!document._componentRegistry) {
         document._componentRegistry = { };
@@ -82,8 +85,12 @@ export function extendComponent(clazz, attributes = []) {
         this._id = ++nextId;
         document._componentRegistry[this._id] = this;
 
-        this.disconnectedCallback = function() {
+        this._disconnectedCallback = this.disconnectedCallback;
+        this.disconnectedCallback = function(...args) {
             this.unregisterComponent();
+            if (typeof this._disconnectedCallback === 'function') {
+                this._disconnectedCallback(...args)
+            }
         }
     }
 
@@ -120,14 +127,37 @@ export function extendComponent(clazz, attributes = []) {
     }
 
     clazz.prototype.html = function(newDomStr) {
-        const newDom = parser.parseFromString(newDomStr, 'text/html');
-        morphdom(this, newDom, {childrenOnly: true});
+        if (typeof this.componentWillUpdate === 'function') {
+            this.componentWillUpdate();
+        }
+
+        morphdom(this, parseDomString(newDomStr), {childrenOnly: true});
+
+        if (typeof this.componentDidUpdate === 'function') {
+            this.componentDidUpdate();
+        }
     }
 
     clazz.prototype.renderChildComponent = function(componentTag) {
-        const component = new (window.customElements.get(componentTag))();
-        component.render()
+        let component = this.querySelector(componentTag);
+        
+        if (!component) {
+            component = new (window.customElements.get(componentTag))();
+            component.render();
+        }
+
         return component.outerHTML;
+    }
+
+    clazz.prototype.randomizeCssClass = function(cssClass) {
+        if (!this._cssClasses) {
+            this._cssClasses = {};
+        }
+        if (this._cssClasses[cssClass]) {
+            return this._cssClasses[cssClass]
+        }
+        this._cssClasses[cssClass] = cssClass + '_' + getRandomString(6);
+        return this._cssClasses[cssClass];
     }
 
     return clazz;
@@ -145,3 +175,20 @@ export function getAnimationClass(currentState, prevState, classList) {
         return prevState ? classList[2] + ' ' + classList[3] : classList[0];
     }
 }
+
+function getRandomString(length) {
+    var text = "";
+    var possible = "abcdefghijklmnopqrstuvwxyz";
+  
+    for (var i = 1; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+  
+    return text;
+}
+
+export function sanitizeString(str) {
+	var temp = document.createElement('div');
+	temp.textContent = str;
+	return temp.innerHTML;
+};
