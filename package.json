@@ -1,13 +1,18 @@
 {
-  "name": "wc-utils",
+  "name": "reactive-web-components",
   "version": "1.0.0",
-  "description": "A collection of helpers for web components",
-  "main": "wc-utils.js",
+  "description": "A thiny library to use the reactive programming paradigm with web components",
+  "main": "reactive-web-components.js",
   "scripts": {
     "test": "jest",
     "testWatch": "jest --watch"
   },
-  "author": "Francesco Bedussi",
+  "homepage": "https://github.com/fbedussi/reactive-web-components",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/fbedussi/reactive-web-components"
+  },
+  "author": "Francesco Bedussi <francesco@francescobedussi.it> (http://www.francescobedussi.it)",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.1.2",
