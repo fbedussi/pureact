@@ -1,4 +1,4 @@
-# Pureact
+# Pureact: reactive web components
 
 Pureact is a thiny library (less than 200 lines of code, 1.4kb minified and zipped) to use the [reactive programming paradigm](https://en.wikipedia.org/wiki/Reactive_programming) with web components. Like react, but with pure vanilla JavaScript. 
 

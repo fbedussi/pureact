@@ -1,5 +1,5 @@
 {
-  "name": "pureact",
+  "name": "pureact-reactive-web-components",
   "version": "1.0.0",
   "description": "A thiny library to use the reactive programming paradigm with web components",
   "keywords": ["reactive", "web components", "declarative", "morphdom", "vanilla js", "react"],
