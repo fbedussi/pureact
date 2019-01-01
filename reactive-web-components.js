@@ -86,8 +86,10 @@ export function extendComponent(clazz, attributes = []) {
         document._componentRegistry[this._id] = this;
 
         this._disconnectedCallback = this.disconnectedCallback;
+        
         this.disconnectedCallback = function(...args) {
             this.unregisterComponent();
+            
             if (typeof this._disconnectedCallback === 'function') {
                 this._disconnectedCallback(...args)
             }
@@ -99,7 +101,7 @@ export function extendComponent(clazz, attributes = []) {
     }
 
     function registerParameter(componentId) {
-        return function returnPramater(param) {
+        return function returnPrameter(param) {
             document._componentRegistry[componentId]._parameterRegistry.push(param);
             const paramIndex = document._componentRegistry[componentId]._parameterRegistry.length - 1;
             return `document._componentRegistry[${componentId}]._parameterRegistry[${paramIndex}]`;
@@ -170,9 +172,9 @@ export function extendComponent(clazz, attributes = []) {
 //3 - reverse animation
 export function getAnimationClass(currentState, prevState, classList) {
     if (currentState) {
-        return prevState ? classList[2] : classList[2] + ' ' + classList[1];
+        return prevState ? classList[1] + ' ' + classList[2] : classList[1];
     } else {
-        return prevState ? classList[2] + ' ' + classList[3] : classList[0];
+        return prevState ? classList[3] : classList[0];
     }
 }
 
