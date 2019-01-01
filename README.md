@@ -14,6 +14,20 @@ Caveats:
 
 [Demo](https://fbedussi.github.io/store-locator-web-component/) - [Demo Code](https://github.com/fbedussi/store-locator-web-component) 
 
+**Table of Contents**
+- [Getting Started](#getting-started)
+- [Watch for props change and reflect attributes to properties](#reflection)
+- [Render a component](#render)
+- [State management](#state)
+- [Inline events handlers](#handlers)
+- [Lifecycle Methods](#lifecycle)
+- [Child Component](#child)
+- [CSS in JS](#css)
+- [Animations](#animations)
+- [Demo](https://fbedussi.github.io/store-locator-web-component/) 
+- [Demo Code](https://github.com/fbedussi/store-locator-web-component) 
+
+<a id="getting-started"></a>
 ## Getting started
 
 Write a custom element class in the usual way, then:
@@ -51,6 +65,7 @@ window.customElements.define('my-custom-button', extendComponent(MyCustomButton)
 ```
 This is by design, in order to allow you to include a regular version, or a minified or a customized one and to let you inspect what's inside the dependency. Total control and transparency it the matra of this project.
 
+<a id="reflection"></a>
 ## Watch for props change and reflect attributes to properties
 `extendComponent` takes as second argument an array thats specifies the attributes to watch for change: `extendComponent(MyComponent: class, propsArray: string[])`
 
@@ -67,6 +82,7 @@ When reflecting attributes to properties, and the other way around, HTML attribu
 When the `propsArray` is passed `extendComponent` automatically creates getters and setters for every property and automatically sets the `observedAttributes` static method on the class to return the `propsArray`. 
 
 
+<a id="render"></a>
 ## Render a component
 
 To render a component a `render` method must be defined, receiving the state as argument. Inside the method is possible to call the `html` method that uses [morphdom](https://github.com/patrick-steele-idem/morphdom) to update the DOM in a non destructive and very efficient way. 
@@ -110,6 +126,7 @@ this.html(`<ul>
 </ul>`);
 ```
 
+<a id="state"></a>
 ## State management
 
 To use a component's state just initialize a `state` property in the class constructor:
@@ -132,7 +149,8 @@ connectedCallback() {
 }
 ```
 
-## Inline events handler
+<a id="handlers"></a>
+## Inline events handlers
 
 Good ol' inline event handlers, like this one:
 ```html
@@ -190,6 +208,14 @@ handleFilterClick(event, storeType) {
 }
 ```
 
+<a id="lifecycle"></a>
+## Lifecycle Methods
+
+Besides the standard custom elements [lifecycle methods](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks), RWC adds:
+- `propertyChangedCallback` is the same as `attributeChangedCallback` but with parameters converted from strings
+- `componentWillUpdate` is called before rendering the component
+- `componentDidUpdate` is called after the component has been rendered
+
 ## Functional Stateless Component
 
 Functional stateless components are just regular functions that take props and return an HTML string:
@@ -201,7 +227,7 @@ export default (handleClick) => `<label>
     </label>`;
 ```
 
-
+<a id="child"></a>
 ## Child Component
 
 To render a child component:
@@ -222,6 +248,7 @@ To render a child component:
     }
 ```
 
+<a id="css"></a>
 ## CSS in JS
 
 To render CSS via JS just include a `<style>` node in the HTML string passed to the `html` method:
@@ -265,6 +292,7 @@ render(stores) {
     }
 ```
 
+<a id="animations"></a>
 ## Animations
 
 RWC provides `getAnimationClass(currentState: boolean, prevState: boolean, classList: string[]): string` to choose the class to apply the right CSS animation, based on current and previous state
