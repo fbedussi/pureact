@@ -1,16 +1,17 @@
 {
-  "name": "reactive-web-components",
+  "name": "pureact",
   "version": "1.0.0",
   "description": "A thiny library to use the reactive programming paradigm with web components",
-  "main": "reactive-web-components.js",
+  "keywords": ["reactive", "web components", "declarative", "morphdom"],
+  "main": "pureact.js",
   "scripts": {
     "test": "jest",
     "testWatch": "jest --watch"
   },
-  "homepage": "https://github.com/fbedussi/reactive-web-components",
+  "homepage": "https://github.com/fbedussi/pureact",
   "repository": {
     "type" : "git",
-    "url" : "https://github.com/fbedussi/reactive-web-components"
+    "url" : "https://github.com/fbedussi/pureact"
   },
   "author": "Francesco Bedussi <francesco@francescobedussi.it> (http://www.francescobedussi.it)",
   "license": "MIT",

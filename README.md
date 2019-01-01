@@ -1,9 +1,9 @@
-# Reactive Web Components
+# Pureact
 
-Reactive Web Components (aka RWC) is a thiny library (less than 200 lines of code, 1.4kb minified and zipped) to use the [reactive programming paradigm](https://en.wikipedia.org/wiki/Reactive_programming) with web components. 
+Pureact is a thiny library (less than 200 lines of code, 1.4kb minified and zipped) to use the [reactive programming paradigm](https://en.wikipedia.org/wiki/Reactive_programming) with web components. Like react but with pure vanilla JavaScript. 
 The actual DOM manipulation is handled by [morphdom](https://github.com/patrick-steele-idem/morphdom) a lightweight and super fast DOM diffing/patching library that works with actual DOM, no virtual DOM involved. Morphdom is at the core of [marko.js](https://markojs.com/) the library used by Ebay. 
 
-RWC has performance similar to React (same fps, slightly more memory usage), but offers several advantages over a virtual DOM library like React:
+Pureact has performance similar to React (same fps, slightly more memory usage), but offers several advantages over a virtual DOM library like React:
 - minimal footprint (1.4kb + 2.6kb for morphodom, minified and zipped)
 - works with standard JavaScript features, no fancy syntax to learn, no update hell, no framework obsolescence
 - just one tiny dependency, this means the maximum of transparency and no security threaths hidden in the dependency tree
@@ -140,7 +140,7 @@ constructor() {
 ```
 Then, to update the state and rerender the component call the `setState` method passing the (partial) state update.
 
-RWC can be used with any global state manager, like Redux. State change can be observed inside the `connectedCallback` method. To avoid unnecessary rerendering is better to watch for a [partial state change](https://redux.js.org/faq/store-setup#how-do-i-subscribe-to-only-a-portion-of-the-state-can-i-get-the-dispatched-action-as-part-of-the-subscription):  
+Pureact can be used with any global state manager, like Redux. State change can be observed inside the `connectedCallback` method. To avoid unnecessary rerendering is better to watch for a [partial state change](https://redux.js.org/faq/store-setup#how-do-i-subscribe-to-only-a-portion-of-the-state-can-i-get-the-dispatched-action-as-part-of-the-subscription):  
 ```javascript
 connectedCallback() {
     subscribePartialState('stores', (state) => {
@@ -211,7 +211,7 @@ handleFilterClick(event, storeType) {
 <a id="lifecycle"></a>
 ## Lifecycle Methods
 
-Besides the standard custom elements [lifecycle methods](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks), RWC adds:
+Besides the standard custom elements [lifecycle methods](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks), Pureact adds:
 - `propertyChangedCallback` is the same as `attributeChangedCallback` but with parameters converted from strings
 - `componentWillUpdate` is called before rendering the component
 - `componentDidUpdate` is called after the component has been rendered
@@ -295,7 +295,7 @@ render(stores) {
 <a id="animations"></a>
 ## Animations
 
-RWC provides `getAnimationClass(currentState: boolean, prevState: boolean, classList: string[]): string` to choose the class to apply the right CSS animation, based on current and previous state
+Pureact provides `getAnimationClass(currentState: boolean, prevState: boolean, classList: string[]): string` to choose the class to apply the right CSS animation, based on current and previous state
 
 classList is an array with 4 values in this order:
 

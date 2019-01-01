@@ -1,4 +1,4 @@
-import { extendComponent, sanitizeString, getAnimationClass } from '../reactive-web-components';
+import { extendComponent, sanitizeString, getAnimationClass } from '../pureact';
 
 test('observedAttributes returns the right value', () => {
     class TestElement { }
